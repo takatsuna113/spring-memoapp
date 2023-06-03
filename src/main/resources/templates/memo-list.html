@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>メモアプリ</title>
+</head>
+<body>
+<h1>メモアプリ</h1>
+<div>
+  <a th:href="@{/memo/create}">新規作成</a>
+  <a th:href="@{/memo/garbage}">ゴミ箱</a>
+</div>
+<div th:each="memo : ${memoList}" th:object="${memo}">
+  <ul>
+    <li>
+      <a th:href="@{/memo/detail/{id}(id=${memo.id})}" th:text="*{title}"></a>
+      <span>作成日：[[${memo.createdAt}]]</span>
+      <span>更新日：[[${memo.updatedAt}]]</span>
+      <a th:href="@{/memo/edit/{id}(id=${memo.id})}">編集</a>
+      <a th:href="@{/memo/delete/{id}(id=${memo.id})}">削除</a>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTDMapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.practiceapp02.repository.MemoMapper">
+  <select id="getMemoList" resultType="Memo">
+    SELECT
+      *
+    FROM
+      memo
+    WHERE
+      deleted = false
+  </select>
+  <insert id="save">
+    INSERT INTO
+      memo (title, content)
+    VALUES
+      (#{title}, #{content})
+  </insert>
+  <select id="findById" resultType="Memo">
+    SELECT
+      title,
+      content
+    FROM
+      memo
+    WHERE
+      id = #{id}
+    AND
+      deleted = false
+  </select>
+  <update id="updateMemo">
+    UPDATE
+      memo
+    SET
+      title = #{title},
+      content = #{content}
+    WHERE
+      id = #{id}
+    AND
+      deleted = false
+  </update>
+  <update id="deleteMemo">
+    UPDATE
+      memo
+    SET
+      deleted = true
+    WHERE
+      id = #{id}
+  </update>
+  <select id="getDeletedMemoList" resultType="Memo">
+    SELECT
+      *
+    FROM
+      memo
+    WHERE
+      deleted = true
+  </select>
+  <update id="cancelDeleteById">
+    UPDATE
+      memo
+    SET
+      deleted = false
+    WHERE
+      id = #{id}
+  </update>
+  <delete id="removeById">
+    DELETE FROM
+      memo
+    WHERE
+      id = #{id}
+    AND
+      deleted = true
+  </delete>
+  <delete id="removeAllMemo">
+    DELETE FROM
+      memo
+    WHERE
+      deleted = true
+  </delete>
+</mapper>
